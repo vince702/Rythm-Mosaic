@@ -104,15 +104,16 @@ void Keyboard::playNotes(){
 
   int notex = rand() % 4; // temporarily randomly spawn the notes
   int notey = rand() % 4;// ^^^^^^^
+
   if (notex == 0) notex = key1x;
   if (notex == 1) notex = key2x;
   if (notex == 2) notex = key3x;
   if (notex == 3) notex = key4x;
+
   if (notey == 0) notey = key1y;
   if (notey == 1) notey = key2y;
   if (notey == 2) notey = key3y;
   if (notey == 3) notey = key4y;
-
 
 
 
