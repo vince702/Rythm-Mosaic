@@ -15,13 +15,13 @@ void key::keyPressEvent(QKeyEvent *event){
 
 void key::updateTimingWindow(){
 status ++;
-if (status == 4){
+if (status == 3){
     this->setBrush(Qt::yellow);
 }
-if (status == 5){
+if (status ==4){
     this->setBrush(Qt::red);
 }
-if (status == 6){
+if (status == 5){
     delete this;
 }
 }
