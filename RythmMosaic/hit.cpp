@@ -5,12 +5,13 @@
 #include <QDebug>
 hit::hit(int x, int y, int width, int length){
     setRect(x,y,width, length);
+
     QTimer * timer = new QTimer;
     connect(timer, SIGNAL(timeout()),this,SLOT(end()));
-    timer->start(75);
+    timer->start(50);
+
 }
 
 void hit::end(){
-    qDebug() << "ended";
-    delete this;
+   delete this;
 }
