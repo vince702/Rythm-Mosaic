@@ -1,12 +1,13 @@
 #include "keyboard.h"
+#include "indicator.h"
 #include <QDebug>
 #include <QTimer>
 #include <QPoint>
-Keyboard::Keyboard()
-{
+#include <QQueue>
 
-}
-//coordinates of hitboxes
+
+
+
 int key1x = 50;
 int key2x = 150;
 int key3x = 250;
@@ -17,6 +18,24 @@ int key2y = 200;
 int key3y = 300;
 int key4y = 400;
 int keyRadius = 80;
+QQueue<key> notes;
+
+Keyboard::Keyboard()
+{
+
+}
+
+Keyboard::Keyboard(QQueue<key> noteList)
+{
+   notes.swap(noteList);
+
+}
+//coordinates of hitboxes
+
+
+
+
+
 void Keyboard::drawKeyboard(QGraphicsScene * scene)
 {
     QGraphicsRectItem * hooprA1 = new QGraphicsRectItem();
@@ -98,9 +117,9 @@ void Keyboard::keyPressEvent(QKeyEvent * event){
 
 }
 void Keyboard::playNotes(){
-    int w = 0;
-  key * note = new key();
 
+
+  key  *note = new key(notes.dequeue());
 
   int notex = rand() % 4; // temporarily randomly spawn the notes
   int notey = rand() % 4;// ^^^^^^^
@@ -115,16 +134,23 @@ void Keyboard::playNotes(){
   if (notey == 2) notey = key3y;
   if (notey == 3) notey = key4y;
 
+  indicator* INDICATOR = new indicator(notex-10, notey-10, keyRadius + 20, keyRadius +20);
+  INDICATOR->setBrush(Qt::white);
+  scene() -> addItem(INDICATOR);
 
 
   note->setRect(notex, notey,keyRadius,keyRadius);
-  note->setBrush(Qt::green);
+  note->setBrush(Qt::white);
   QTimer * timer = new QTimer;
    key::connect(timer, SIGNAL(timeout()),note,SLOT(updateTimingWindow()));
-  timer->start(100);
+  timer->start(100);   // .1 seconds per interval, has .3 seconds until note needs to be striken
   QPoint p = QCursor::pos();
   scene() -> addItem(note);
 
+ if (notes.empty())  {
+     qDebug() << "song ended";
+     delete this;
+ }
 
 }
 

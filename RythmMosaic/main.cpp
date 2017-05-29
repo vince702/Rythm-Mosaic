@@ -10,6 +10,9 @@
 #include "keyboard.h"
 #include "gamewindow.h"
 #include <QTimer>
+#include <QQueue>
+
+
 
 
 int main(int argc, char *argv[])
@@ -17,8 +20,30 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     gamewindow * paper = new gamewindow();
 
-    Keyboard * k = new Keyboard();
+    QQueue<key> notes;;
+    key *s = new key();
+
+
+    for (int i = 0; i < 20; i++){
+    notes.enqueue(key());
+    }
+
+
+    Keyboard * k = new Keyboard(notes);
     k->drawKeyboard(paper);
+
+  \
+
+
+
+
+
+
+
+
+
+
+
 
     QGraphicsRectItem * topBar = new QGraphicsRectItem(0,0,500,50);
     std::cout << "Welcome";
@@ -30,7 +55,7 @@ int main(int argc, char *argv[])
 
     QTimer * timer = new QTimer();
     Keyboard::connect(timer, SIGNAL(timeout()),k,SLOT(playNotes()));
-    timer->start(700);
+    timer->start(300);
 
 
     return a.exec();

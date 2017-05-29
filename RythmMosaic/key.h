@@ -1,6 +1,6 @@
 #ifndef KEY_H
 #define KEY_H
-#include <QGraphicsEllipseItem>
+#include <QGraphicsRectItem>
 #include <QKeyEvent>
 class key: public QObject, public QGraphicsRectItem
 {
@@ -11,8 +11,9 @@ public:
     int status;
     int duration;
     key();
+    key(const key &k);
     void keyPressEvent(QKeyEvent *event);
-
+    key& operator=(const key& );
 public slots:
      void updateTimingWindow();
 
