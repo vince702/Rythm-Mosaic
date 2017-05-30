@@ -13,10 +13,11 @@
 #include <QQueue>
 #include "score.h"
 #include <QDebug>
+#include "game_client.h"
 
-gamewindow* paper;
-Keyboard* k;
 
+extern Keyboard * k;
+extern gamewindow * paper;
 
 void runGame();
 
@@ -24,8 +25,9 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     int i = 0;
+    game_client * game = new game_client();
     while(true) {
-        runGame();
+        game->start();
         i++;
         if (i == 1) break;
     }
@@ -37,40 +39,7 @@ int main(int argc, char *argv[])
 }
 
 
-void runGame(){
-    paper = new gamewindow();
 
-    QQueue<key> notes;;
-    key *s = new key();
-
-
-    for (int i = 0; i < 5; i++){
-    notes.enqueue(key());
-    }
-
-
-    k = new Keyboard(notes);
-    k->drawKeyboard(paper);
-
-
-
-
-    QGraphicsRectItem * topBar = new QGraphicsRectItem(0,0,500,50);
-    qDebug() << "hello";
-
-
-
-    paper->addItem(k);
-    k->setFlag(QGraphicsItem::ItemIsFocusable);
-    k->setFocus();
-    QGraphicsView *view = new QGraphicsView(paper);
-    view->show();
-
-
-    QTimer * timer = new QTimer();
-    Keyboard::connect(timer, SIGNAL(timeout()),k,SLOT(playNotes()));
-    timer->start(900);
-}
 
 void test(){
     qDebug() << "test";
