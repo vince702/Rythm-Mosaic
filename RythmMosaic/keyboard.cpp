@@ -18,16 +18,25 @@ int key2y = 200;
 int key3y = 300;
 int key4y = 400;
 int keyRadius = 80;
-QQueue<key> notes;
+
+int score =0;
+int combo = 0;
+
+
+
 
 Keyboard::Keyboard()
 {
+  scoreDisplay = new score::score();
+  bpm = 60;
 
 }
 
 Keyboard::Keyboard(QQueue<key> noteList)
 {
    notes.swap(noteList);
+   scoreDisplay = new score::score();
+   bpm = 60; // default 1 beat / sec
 
 }
 //coordinates of hitboxes
@@ -38,6 +47,10 @@ Keyboard::Keyboard(QQueue<key> noteList)
 
 void Keyboard::drawKeyboard(QGraphicsScene * scene)
 {
+
+
+    scene->addItem(scoreDisplay);
+
     QGraphicsRectItem * hooprA1 = new QGraphicsRectItem();
     hooprA1->setRect(key1x,key1y,keyRadius,keyRadius);
     QGraphicsRectItem * hooprA2 = new QGraphicsRectItem();
@@ -118,6 +131,9 @@ void Keyboard::keyPressEvent(QKeyEvent * event){
 }
 void Keyboard::playNotes(){
 
+    if (notes.empty() == false)  {
+
+
 
   key  *note = new key(notes.dequeue());
 
@@ -143,13 +159,19 @@ void Keyboard::playNotes(){
   note->setBrush(Qt::white);
   QTimer * timer = new QTimer;
    key::connect(timer, SIGNAL(timeout()),note,SLOT(updateTimingWindow()));
-  timer->start(100);   // .1 seconds per interval, has .3 seconds until note needs to be striken
-  QPoint p = QCursor::pos();
+   timer->start(100);   // .1 seconds per interval, has .3 seconds until note needs to be striken
+
   scene() -> addItem(note);
 
+
+
+ }
+
  if (notes.empty())  {
+
      qDebug() << "song ended";
-     delete this;
+
+
  }
 
 }

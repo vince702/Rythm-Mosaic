@@ -9,7 +9,7 @@
 #include <QObject>
 #include "indicator.h"
 #include <QQueue>
-
+#include "score.h"
 
 class Keyboard:  public QObject,public QGraphicsEllipseItem {
 
@@ -20,7 +20,9 @@ public:
     Keyboard(QQueue<key> noteList);
     void drawKeyboard(QGraphicsScene * scene);
     void keyPressEvent(QKeyEvent * event);
-
+    score * scoreDisplay;
+    int bpm = 60;
+    QQueue<key> notes;
 
 public slots:
     void playNotes();
