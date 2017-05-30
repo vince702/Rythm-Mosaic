@@ -28,12 +28,21 @@ SOURCES += main.cpp\
     keyboard.cpp \
     hit.cpp \
     key.cpp \
-    gamewindow.cpp
+    gamewindow.cpp \
+    indicator.cpp \
+    score.cpp \
+    game_client.cpp
 
 HEADERS  += mainwindow.h \
     keyboard.h \
     hit.h \
     key.h \
-    gamewindow.h
+    gamewindow.h \
+    indicator.h \
+    score.h \
+    game_client.h
 
 FORMS    += mainwindow.ui
+
+RESOURCES += \
+    resources.qrc
