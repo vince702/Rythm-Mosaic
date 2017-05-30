@@ -15,22 +15,24 @@
 #include <QDebug>
 #include "game_client.h"
 
-
+int currentTime = 0;
 extern Keyboard * k;
 extern gamewindow * paper;
+game_client * game;
+
 
 void runGame();
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
-    int i = 0;
-    game_client * game = new game_client();
-    while(true) {
-        game->start();
-        i++;
-        if (i == 1) break;
-    }
+
+     int i = 0;
+     QApplication a(argc, argv);
+     game = new game_client();
+     QQueue<key> notes;
+     game->start(notes);
+
+
 
 
 

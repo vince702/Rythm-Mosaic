@@ -25,7 +25,8 @@ class game_client: public QGraphicsView
     Q_OBJECT
 public:
     game_client();
-    void start();
+    void showTitleScreen();
+    void start(QQueue<key> notes);
 
 };
 
