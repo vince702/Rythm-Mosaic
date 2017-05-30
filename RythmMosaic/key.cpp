@@ -12,14 +12,22 @@ key::key()
 {
 status = 0; //perfect, about to disappear, miss
 duration = 0;
+time = 0;
 }
 
 key::key(const key &k)
 {
 this->status = k.status; // ^^^^^^^
 this->duration = k.duration;
+ this->time = k.time;
 }
 
+key::key(const int time){
+
+    status = 0;
+    duration = 0;
+    this->time = time;
+}
 
 void key::keyPressEvent(QKeyEvent *event){
 

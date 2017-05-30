@@ -10,8 +10,10 @@ class key: public QObject, public QGraphicsRectItem
 public:
     int status;
     int duration;
+    int time;
     key();
     key(const key &k);
+    key(const int time);
     void keyPressEvent(QKeyEvent *event);
     key& operator=(const key& );
 public slots:
