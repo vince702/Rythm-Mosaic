@@ -11,53 +11,67 @@
 #include "gamewindow.h"
 #include <QTimer>
 #include <QQueue>
+#include "score.h"
+#include <QDebug>
+
+gamewindow* paper;
+Keyboard* k;
 
 
-
+void runGame();
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    gamewindow * paper = new gamewindow();
+    int i = 0;
+    while(true) {
+        runGame();
+        i++;
+        if (i == 1) break;
+    }
+
+
+
+    return a.exec();
+
+}
+
+
+void runGame(){
+    paper = new gamewindow();
 
     QQueue<key> notes;;
     key *s = new key();
 
 
-    for (int i = 0; i < 20; i++){
+    for (int i = 0; i < 5; i++){
     notes.enqueue(key());
     }
 
 
-    Keyboard * k = new Keyboard(notes);
+    k = new Keyboard(notes);
     k->drawKeyboard(paper);
-
-  \
-
-
-
-
-
-
-
-
 
 
 
 
     QGraphicsRectItem * topBar = new QGraphicsRectItem(0,0,500,50);
-    std::cout << "Welcome";
+    qDebug() << "hello";
+
+
+
     paper->addItem(k);
     k->setFlag(QGraphicsItem::ItemIsFocusable);
     k->setFocus();
     QGraphicsView *view = new QGraphicsView(paper);
     view->show();
 
+
     QTimer * timer = new QTimer();
     Keyboard::connect(timer, SIGNAL(timeout()),k,SLOT(playNotes()));
-    timer->start(300);
+    timer->start(900);
+}
 
-
-    return a.exec();
-
+void test(){
+    qDebug() << "test";
 }
