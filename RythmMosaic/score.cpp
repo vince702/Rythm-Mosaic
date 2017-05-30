@@ -1,6 +1,6 @@
 #include "score.h"
 #include <QFont>
-
+extern int currentTime;
 score::score(QGraphicsItem * parent) : QGraphicsTextItem(parent)
 {
 
@@ -8,13 +8,13 @@ score::score(QGraphicsItem * parent) : QGraphicsTextItem(parent)
  currentCombo = 0;
  acc = 0;
 
- setPlainText(QString("HIT_COUNT: ") +  QString::number(hitcount) + "              "
-              + QString("COMBO: ") +  QString::number(currentCombo) + "              "
+ setPlainText( "   " + QString("HIT_COUNT: ") +  QString::number(hitcount) + "              "
+              + QString("CURRENT COMBO: ") +  QString::number(currentCombo) + "              "
               + QString("MAX COMBO: ") +  QString::number(acc));
 
 
  setDefaultTextColor(Qt::red);
- setFont(QFont("arial", 15));
+ setFont(QFont("arial", 19));
 
 
 }
@@ -22,7 +22,7 @@ score::score(QGraphicsItem * parent) : QGraphicsTextItem(parent)
 void score::increase(){
 
    hitcount++;
-   setPlainText(QString("HIT_COUNT: ") +  QString::number(hitcount) + "              "
+   setPlainText("   " +QString("HIT_COUNT: ") +  QString::number(hitcount) + "              "
                 + QString("CURRENT COMBO: ") +  QString::number(currentCombo) + "              "
                 + QString("MAX COMBO: ") +  QString::number(maxCombo));
 
@@ -32,7 +32,7 @@ void score::increaseCurrentCombo(){
 
    currentCombo++;
    if (currentCombo > maxCombo) maxCombo++;
-   setPlainText(QString("HIT_COUNT: ") +  QString::number(hitcount) + "              "
+   setPlainText("   " +QString("HIT_COUNT: ") +  QString::number(hitcount) + "              "
                 + QString("CURRENT COMBO: ") +  QString::number(currentCombo) + "              "
                 + QString("MAX COMBO: ") +  QString::number(maxCombo));
 
@@ -40,7 +40,7 @@ void score::increaseCurrentCombo(){
 
 void score::resetCombo(){
     currentCombo = 0;
-    setPlainText(QString("HIT_COUNT: ") +  QString::number(hitcount) + "              "
+    setPlainText("   " +QString("HIT_COUNT: ") +  QString::number(hitcount) + "              "
                  + QString("CURRENT COMBO: ") +  QString::number(currentCombo) + "              "
                  + QString("MAX COMBO: ") +  QString::number(maxCombo));
 }
