@@ -4,8 +4,7 @@
 #include <QTimer>
 #include <QPoint>
 #include <QQueue>
-
-
+#include "game_client.h"
 
 
 int key1x = 50;
@@ -19,11 +18,13 @@ int key3y = 300;
 int key4y = 400;
 int keyRadius = 80;
 
+extern int currentTime;
+
 int score =0;
 int combo = 0;
 
-
-
+extern game_client * game;
+extern gamewindow * paper;
 
 Keyboard::Keyboard()
 {
@@ -49,7 +50,7 @@ void Keyboard::drawKeyboard(QGraphicsScene * scene)
 {
 
 
-    scene->addItem(scoreDisplay);
+    paper->addItem(scoreDisplay);
 
     QGraphicsRectItem * hooprA1 = new QGraphicsRectItem();
     hooprA1->setRect(key1x,key1y,keyRadius,keyRadius);
@@ -90,30 +91,30 @@ void Keyboard::drawKeyboard(QGraphicsScene * scene)
 
 
     QGraphicsRectItem * topBar = new QGraphicsRectItem(0,0,700,50);
-    QGraphicsRectItem * board = new QGraphicsRectItem(0,0,700,600);
+    QGraphicsRectItem * board = new QGraphicsRectItem(0,0,700,550);
 
-    scene->addItem(topBar);
-    scene->addItem(board);
+    paper->addItem(topBar);
+    paper->addItem(board);
 
-    scene->addItem(hooprA1);
-    scene->addItem(hooprA2);
-    scene->addItem(hooprA3);
-    scene->addItem(hooprA4);
+    paper->addItem(hooprA1);
+    paper->addItem(hooprA2);
+    paper->addItem(hooprA3);
+    paper->addItem(hooprA4);
 
-    scene->addItem(hooprB1);
-    scene->addItem(hooprB2);
-    scene->addItem(hooprB3);
-    scene->addItem(hooprB4);
+    paper->addItem(hooprB1);
+    paper->addItem(hooprB2);
+    paper->addItem(hooprB3);
+    paper->addItem(hooprB4);
 
-    scene->addItem(hooprC1);
-    scene->addItem(hooprC2);
-    scene->addItem(hooprC3);
-    scene->addItem(hooprC4);
+    paper->addItem(hooprC1);
+    paper->addItem(hooprC2);
+    paper->addItem(hooprC3);
+    paper->addItem(hooprC4);
 
-    scene->addItem(hooprD1);
-    scene->addItem(hooprD2);
-    scene->addItem(hooprD3);
-    scene->addItem(hooprD4);
+    paper->addItem(hooprD1);
+    paper->addItem(hooprD2);
+    paper->addItem(hooprD3);
+    paper->addItem(hooprD4);
 
 
 }
@@ -123,17 +124,19 @@ void Keyboard::keyPressEvent(QKeyEvent * event){
         //create hitbox
         hit * hitbox = new hit(45,450,60,60);
         qDebug() << "hello";
-        scene()->addItem(hitbox);
+        paper->addItem(hitbox);
         QPoint p = QCursor::pos();
 
     }
 
 }
 void Keyboard::playNotes(){
+     currentTime++;
 
-    if (notes.empty() == false)  {
+    if (notes.empty() == false && currentTime == notes.front().time)  {
 
 
+qDebug() << "suw";
 
   key  *note = new key(notes.dequeue());
 
@@ -152,24 +155,32 @@ void Keyboard::playNotes(){
 
   indicator* INDICATOR = new indicator(notex-10, notey-10, keyRadius + 20, keyRadius +20);
   INDICATOR->setBrush(Qt::white);
-  scene() -> addItem(INDICATOR);
+  paper -> addItem(INDICATOR);
 
 
   note->setRect(notex, notey,keyRadius,keyRadius);
   note->setBrush(Qt::white);
   QTimer * timer = new QTimer;
    key::connect(timer, SIGNAL(timeout()),note,SLOT(updateTimingWindow()));
-   timer->start(100);   // .1 seconds per interval, has .3 seconds until note needs to be striken
+   int intervalLength = 60/bpm * 100;
+   timer->start(intervalLength);   // .1 seconds per interval, has .3 seconds until note needs to be striken
 
-  scene() -> addItem(note);
+  paper -> addItem(note);
 
 
 
  }
 
- if (notes.empty())  {
+ if (notes.empty() && currentTime == 6000)  {
 
      qDebug() << "song ended";
+
+     paper->clear();
+
+
+     game->showTitleScreen();
+
+
 
 
  }
