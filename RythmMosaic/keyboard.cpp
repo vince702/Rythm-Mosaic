@@ -133,7 +133,7 @@ void Keyboard::keyPressEvent(QKeyEvent * event){
 void Keyboard::playNotes(){
      currentTime++;
 
-    if (notes.empty() == false && currentTime == notes.front().time)  {
+    if (notes.empty() == false && currentTime == notes.front().time-200)  {
 
 
 qDebug() << "suw";
@@ -160,18 +160,19 @@ qDebug() << "suw";
 
   note->setRect(notex, notey,keyRadius,keyRadius);
   note->setBrush(Qt::white);
-  QTimer * timer = new QTimer;
-   key::connect(timer, SIGNAL(timeout()),note,SLOT(updateTimingWindow()));
-   int intervalLength = 60/bpm * 100;
-   timer->start(intervalLength);   // .1 seconds per interval, has .3 seconds until note needs to be striken
-
+  QTimer * timer1 = new QTimer;
   paper -> addItem(note);
+   key::connect(timer1, SIGNAL(timeout()),note,SLOT(updateTimingWindow()));
+   int intervalLength = 100;
+   timer1->start(intervalLength);   // .1 seconds per interval, has .3 seconds until note needs to be striken
+
+
 
 
 
  }
 
- if (notes.empty() && currentTime == 6000)  {
+ if (notes.empty() && currentTime >= 60000)  {
 
      qDebug() << "song ended";
 
