@@ -48,7 +48,7 @@ void hit::end(){
           scene()->removeItem(item);
           delete this;
 
-          item->status = 10;
+          item->duration = 1;
 
           return;
       }

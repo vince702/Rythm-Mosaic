@@ -48,12 +48,12 @@ if (status == 1){
 if (status ==6){
     this->setBrush(Qt::green); //signals note's about to dissappear
 }
-if (status == 7){
+if (status == 7 && duration == 0){
      //miss a note = reset combo
     delete this;
     k->scoreDisplay->resetCombo();
 }
-if (status == 11){
+if (status == 7 && duration== 1){
      //miss a note = reset combo
     k->scoreDisplay->increase();
     k->scoreDisplay->increaseCurrentCombo();
