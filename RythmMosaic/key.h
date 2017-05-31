@@ -14,6 +14,7 @@ public:
     key();
     key(const key &k);
     key(const int time);
+    key(const int time, const int location);
     void keyPressEvent(QKeyEvent *event);
     key& operator=(const key& );
 public slots:

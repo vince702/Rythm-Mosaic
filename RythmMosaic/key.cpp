@@ -29,21 +29,38 @@ key::key(const int time){
     this->time = time;
 }
 
+key::key(const int time, const int location){
+
+    status = 0;
+    duration = 0;
+    this->time = time;
+}
+
 void key::keyPressEvent(QKeyEvent *event){
 
 }
 
 void key::updateTimingWindow(){
-status ++;
-if (status == 2){
+
+if (status == 1){
     this->setBrush(Qt::green);//time to strike the note
 }
 if (status ==6){
-    this->setBrush(Qt::yellow); //signals note's about to dissappear
+    this->setBrush(Qt::green); //signals note's about to dissappear
 }
-if (status == 9){
+if (status == 7){
      //miss a note = reset combo
     delete this;
     k->scoreDisplay->resetCombo();
 }
+if (status == 11){
+     //miss a note = reset combo
+    k->scoreDisplay->increase();
+    k->scoreDisplay->increaseCurrentCombo();
+    delete this;
+
+
+}
+status ++;
+
 }
