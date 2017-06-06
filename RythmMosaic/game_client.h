@@ -26,7 +26,10 @@ class game_client: public QGraphicsView
 public:
     game_client();
     void showTitleScreen();
-    void start(QQueue<key> notes);
+
+
+ public slots:
+    void start();
 
 };
 
