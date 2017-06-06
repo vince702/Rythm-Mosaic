@@ -20,12 +20,14 @@ key::key(const key &k)
 this->status = k.status; // ^^^^^^^
 this->duration = k.duration;
  this->time = k.time;
+    this->location = k.location;
 }
 
 key::key(const int time){
 
     status = 0;
     duration = 0;
+    this->location = 0;
     this->time = time;
 }
 
@@ -34,6 +36,7 @@ key::key(const int time, const int location){
     status = 0;
     duration = 0;
     this->time = time;
+    this->location = location;
 }
 
 void key::keyPressEvent(QKeyEvent *event){

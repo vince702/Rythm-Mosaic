@@ -11,6 +11,7 @@ public:
     int status;
     int duration;
     int time;
+    int location;
     key();
     key(const key &k);
     key(const int time);
