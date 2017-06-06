@@ -135,23 +135,94 @@ void Keyboard::playNotes(){
 
     if (notes.empty() == false && currentTime == notes.front().time-200)  {
 
+        double notex = 0; // temporarily randomly spawn the notes
+        double notey= 0;// ^^^^^^^
 
-qDebug() << "suw";
+        qDebug() << notes.front().location << "   " << notes.front().time;
+        if (notes.front().location == 1){
+          notex = key1x;
+          notey = key1y;
+        }
+        if (notes.front().location == 2){
+            notex = key2x;
+            notey = key1y;
+        }
+
+        if (notes.front().location == 3){
+            notex = key3x;
+            notey = key1y;
+        }
+
+        if (notes.front().location == 4){
+            notex = key4x;
+            notey = key1y;
+        }
+
+        if (notes.front().location == 5){
+            notex = key1x;
+            notey = key2y;
+        }
+
+        if (notes.front().location == 6){
+            notex = key2x;
+            notey = key2y;
+        }
+
+        if (notes.front().location == 7){
+            notex = key3x;
+            notey = key2y;
+        }
+
+        if (notes.front().location == 8){
+            notex = key4x;
+            notey = key2y;
+        }
+
+        if (notes.front().location == 9){
+            notex = key1x;
+            notey = key3y;
+        }
+
+        if (notes.front().location == 10){
+            notex = key2x;
+            notey = key3y;
+        }
+
+        if (notes.front().location == 11){
+            notex = key3x;
+            notey = key3y;
+        }
+
+        if (notes.front().location == 12){
+            notex = key4x;
+            notey = key3y;
+        }
+
+        if (notes.front().location == 13){
+            notex = key1x;
+            notey = key4y;
+        }
+
+        if (notes.front().location == 14){
+            notex = key2x;
+            notey = key4y;
+        }
+
+        if (notes.front().location == 15){
+            notex = key3x;
+            notey = key4y;
+        }
+
+        if (notes.front().location == 16){
+            notex = key4x;
+            notey = key4y;
+        }
+
+//qDebug() << "suw";
 
   key  *note = new key(notes.dequeue());
 
-  int notex = rand() % 4; // temporarily randomly spawn the notes
-  int notey = rand() % 4;// ^^^^^^^
 
-  if (notex == 0) notex = key1x;
-  if (notex == 1) notex = key2x;
-  if (notex == 2) notex = key3x;
-  if (notex == 3) notex = key4x;
-
-  if (notey == 0) notey = key1y;
-  if (notey == 1) notey = key2y;
-  if (notey == 2) notey = key3y;
-  if (notey == 3) notey = key4y;
 
   indicator* INDICATOR = new indicator(notex-10, notey-10, keyRadius + 20, keyRadius +20);
   INDICATOR->setBrush(Qt::white);
@@ -168,11 +239,11 @@ qDebug() << "suw";
 
 
 
-
+// note deleted after updateTimingWindow() comes to an end
 
  }
 
- if (notes.empty() && currentTime >= 60000)  {
+ if ( currentTime >= 90000)  {
 
      qDebug() << "song ended";
 
