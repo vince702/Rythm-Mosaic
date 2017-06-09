@@ -16,7 +16,7 @@ public:
     virtual void mousePressEvent(QGraphicsSceneMouseEvent * mouseEvent);
     virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent * mouseEvent);
 signals:
-
+   void clicked();
 public slots:
 
 private:
