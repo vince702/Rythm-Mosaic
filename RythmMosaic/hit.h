@@ -14,6 +14,7 @@ Q_OBJECT
 
 
  public:
+    int status = 0;
 
 
     hit(int x, int y, int width, int length);
