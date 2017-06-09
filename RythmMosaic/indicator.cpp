@@ -1,24 +1,13 @@
 #include "indicator.h"
 #include <QTimer>
+extern int currentTime;
 
-indicator::indicator(int x, int y, int width, int length){
-    setRect(x,y, width, length);
-
-    QTimer * timerIndicator = new QTimer;
-    connect(timerIndicator, SIGNAL(timeout()),this,SLOT(shrink()));
-    timerIndicator->start(400);
+indicator::indicator(){
 
 }
 
-void indicator::shrink(){
-
-    countdown--;
-
-
-
-    setRect(x,y, width, length);
-
-
-    if (this->countdown = 0) delete this;
-
+void indicator::update(){
+    emit clicked();
 }
+
+
