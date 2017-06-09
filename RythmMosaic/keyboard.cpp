@@ -17,8 +17,10 @@ int key2y = 200;
 int key3y = 300;
 int key4y = 400;
 int keyRadius = 80;
+int playing = 1; // tests whether or not song is playing
 
 extern int currentTime;
+extern int songNumber;
 
 int score =0;
 int combo = 0;
@@ -138,7 +140,7 @@ void Keyboard::playNotes(){
         double notex = 0; // temporarily randomly spawn the notes
         double notey= 0;// ^^^^^^^
 
-        qDebug() << notes.front().location << "   " << notes.front().time;
+
         if (notes.front().location == 1){
           notex = key1x;
           notey = key1y;
@@ -224,9 +226,7 @@ void Keyboard::playNotes(){
 
 
 
-  indicator* INDICATOR = new indicator(notex-10, notey-10, keyRadius + 20, keyRadius +20);
-  INDICATOR->setBrush(Qt::white);
-  paper -> addItem(INDICATOR);
+
 
 
   note->setRect(notex, notey,keyRadius,keyRadius);
@@ -249,6 +249,8 @@ void Keyboard::playNotes(){
 
      paper->clear();
 
+     playing = 0;
+     currentTime =0;
 
      game->showTitleScreen();
 
