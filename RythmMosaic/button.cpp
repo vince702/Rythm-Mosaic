@@ -2,7 +2,9 @@
 #include <QGraphicsTextItem>
 #include <QBrush>
 
+
 extern int songNumber;
+
 
 button::button(QString word, int trackNo, QGraphicsItem * parent) : QGraphicsRectItem(parent)
 {
@@ -35,5 +37,7 @@ void button::hoverLeaveEvent(QGraphicsSceneHoverEvent *event){
     QBrush brush;
     brush.setStyle(Qt::SolidPattern);
     brush.setColor(Qt::darkMagenta);
+    setOpacity(Qt::transparent);
     setBrush(brush);
+     songNumber = this->trackNumber;
 }
