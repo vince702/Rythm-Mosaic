@@ -115,13 +115,7 @@ void game_client::showTitleScreen(){
 
 }
 
-void convertNotes(std::vector<double> noteTimingList,std::vector<double> noteLocationlist, QQueue<key> &notes){
 
-   for (int i = 0; i < noteTimingList.size(); i++){
-       notes.enqueue(key(noteTimingList.at(i), noteLocationlist.at(i)));
-   }
-
-}
 
 void game_client::start(){
 
