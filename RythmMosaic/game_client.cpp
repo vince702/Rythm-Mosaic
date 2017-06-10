@@ -113,7 +113,6 @@ void game_client::showTitleScreen(){
 
 
 
-
 }
 
 void convertNotes(std::vector<double> noteTimingList,std::vector<double> noteLocationlist, QQueue<key> &notes){
@@ -187,9 +186,18 @@ menuScreenSong->stop();
      }
 
      */
+      auto getNotes = [&notes](std::vector<double> noteTimingList,std::vector<double> noteLocationlist){
 
 
-     convertNotes(timings,locations, notes);
+          for (int i = 0; i < noteTimingList.size(); i++){
+              notes.enqueue(key(noteTimingList.at(i), noteLocationlist.at(i)));
+          }
+
+
+      };
+
+
+     getNotes(timings,locations);
 
 
 

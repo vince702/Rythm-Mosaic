@@ -1,1 +1,19 @@
-<RCC/>
+<RCC>
+    <qresource prefix="/songs">
+        <file>clap.wav</file>
+        <file>narutaru op.mp3</file>
+        <file>WaretaRingo.mp3</file>
+        <file>next to you.mp3</file>
+        <file>lake.jpg</file>
+    </qresource>
+    <qresource prefix="/textFiles">
+        <file>narutaru.txt</file>
+        <file>WaretaRingo.txt</file>
+    </qresource>
+    <qresource prefix="/images">
+        <file>lake.jpg</file>
+        <file>shinsekai.jpg</file>
+        <file>narutaru.jpg</file>
+        <file>narutaru.png</file>
+    </qresource>
+</RCC>
