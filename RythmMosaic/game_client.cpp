@@ -20,7 +20,7 @@ paper = new gamewindow();
 
 }
 
-void convertNotes(std::vector<double> noteTimingList,std::vector<double> noteLocationlist, QQueue<key> &notes);
+
 void game_client::showTitleScreen(){
 
 
