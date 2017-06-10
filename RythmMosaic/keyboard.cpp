@@ -21,6 +21,7 @@ int playing = 1; // tests whether or not song is playing
 
 extern int currentTime;
 extern int songNumber;
+extern int songDuration;
 
 int score =0;
 int combo = 0;
@@ -243,7 +244,7 @@ void Keyboard::playNotes(){
 
  }
 
- if ( currentTime >= 90000)  {
+ if ( currentTime >= songDuration)  {
 
      qDebug() << "song ended";
 

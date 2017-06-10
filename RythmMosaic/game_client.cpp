@@ -11,7 +11,9 @@ Keyboard* k;
 QGraphicsView *view;
 QMediaPlayer * menuScreenSong = new QMediaPlayer();
 int songNumber = 0;
+int songDuration = 90000; //default length of beatmap is around 1:30
 extern int playing;
+
 
 extern int currentTime;
 game_client::game_client()
@@ -23,10 +25,7 @@ paper = new gamewindow();
 
 void game_client::showTitleScreen(){
 
-
-
-
-
+    auto populateTitleScreen = [](){};
 
      if (view) view->close();
 
@@ -119,24 +118,21 @@ void game_client::showTitleScreen(){
 
 void game_client::start(){
 
-playing = 1;
-menuScreenSong->stop();
-
-
+    playing = 1;  // signifies that a beatmap has started to be played
+    menuScreenSong->stop();
 
     if (view) view->close();
-    paper->clear();
+    paper->clear();  // clears the window for a new game
 
    QQueue<key> notes;
 
-    double songLength;
+
     QString textFileName = "";
 
     if (songNumber == 0) { textFileName = ":/textFiles/narutaru.txt";
 
        // QPixmap m(":/images/narutaru.png");
-
-          // paper->setBackgroundBrush(m);
+          // paper->setBackgroundBrush(m);   // meh, don't like changing backgrounds too be honest. Feels weird.
     }
 
     if (songNumber == 1) { textFileName = ":/textFiles/WaretaRingo.txt";
@@ -146,75 +142,54 @@ menuScreenSong->stop();
     }
 
 
-        QFile f(textFileName);
 
+
+    /***************** LAMBDA FUNCTIONS *****************/
+
+    QFile f(textFileName);
     f.open(QIODevice::ReadOnly);
-    QTextStream s(&f);
+
     std:: vector<double> timings;
     std:: vector<double> locations;
-    s >> songLength;
-    while ( !s.atEnd() ) {
-      double d;
-      double f;
-      s >> d;
-      s >> f;
-      timings.push_back(d);
-      locations.push_back(f);
 
-      qDebug() << d << "  " << f;
+    /*  reads data from file, adds to a vector of timings and location, each entry represents the time played
+        of the note, and where on the grid it will be played  */
+        auto dataToVector = [&f,&timings,&locations](int &beatmapDuration){
+         QTextStream s(&f);
+       int songLength = 0;
+       s >> beatmapDuration;
+       while ( !s.atEnd() ) {
+         double d;
+         double f;
+         s >> d;
+         s >> f;
+         timings.push_back(d);
+         locations.push_back(f);
 
-    }
-    timings.pop_back();
-    qDebug() << timings.at(timings.size() -1);
-    qDebug() << locations.at(locations.size() -1);
+         qDebug() << d << "  " << f;
 
+       }
 
+       timings.pop_back();
 
-   /*  int i = 0;       // tests by randomly generating notes with random timing and location
+     };
 
-
-     std:: vector<int> v;
-     for (int i = 1; i < 100; i++){
-         int k = rand() % 2;
-         if (k ==1) {v.push_back(i*200); qDebug()<< i*200;}
-     }
-
-     */
-      auto getNotes = [&notes](std::vector<double> noteTimingList,std::vector<double> noteLocationlist){
-
+     //reads the data from the timing and location list to creat a key, and adds to queue of keys to be played
+      auto getNotes = [&notes](std::vector<double> &noteTimingList,std::vector<double> &noteLocationlist){
 
           for (int i = 0; i < noteTimingList.size(); i++){
               notes.enqueue(key(noteTimingList.at(i), noteLocationlist.at(i)));
           }
-
-
       };
 
+      dataToVector(songDuration);
+      getNotes(timings,locations);
 
-     getNotes(timings,locations);
-
-
-
-
-
-
-
-
-
-
-
-    /*
-    for (int i = 1; i < 11; i++){
-    notes.enqueue(key(i*100));
-    }
-    */
-
-
+     /****************************************************/
 
 
     k = new Keyboard(notes);
     k->drawKeyboard(paper);
-
 
 
     QMediaPlayer * currentSong = new QMediaPlayer();
@@ -240,7 +215,6 @@ menuScreenSong->stop();
 
     view = new QGraphicsView(paper);
     view->show();
-
 
     QTimer * timer = new QTimer();
     Keyboard::connect(timer, SIGNAL(timeout()),k,SLOT(playNotes()));
