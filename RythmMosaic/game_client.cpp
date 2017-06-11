@@ -23,6 +23,23 @@ paper = new gamewindow();
 }
 
 
+/***************************************************************
+ * Generic Function to Add Keys from any vector of times and locations
+ * *************************************************************/
+
+template<typename InputIterator, typename Container>
+void convertToKeys( InputIterator v1Start,InputIterator v2Start,InputIterator v1End, InputIterator v2End, Container &c ){
+    while ( v1Start != v1End ){
+        c.enqueue(key(*v1Start, *v2Start));
+        v1Start++;
+        v2Start++;
+    }
+    return;
+}
+
+/****************************************************************/
+
+
 void game_client::showTitleScreen(){
 
     auto populateTitleScreen = [](){};
@@ -144,7 +161,9 @@ void game_client::start(){
 
 
 
-    /***************** LAMBDA FUNCTIONS *****************/
+    /**********************************************************
+                           LAMBDA FUNCTIONS
+    **************************************************************/
 
     QFile f(textFileName);
     f.open(QIODevice::ReadOnly);
@@ -172,18 +191,22 @@ void game_client::start(){
 
        timings.pop_back();
 
+      f.close();
      };
 
      //reads the data from the timing and location list to creat a key, and adds to queue of keys to be played
-      auto getNotes = [&notes](std::vector<double> &noteTimingList,std::vector<double> &noteLocationlist){
+      auto getNotes = [&notes](std::vector<double> &noteTimingList,std::vector<double> &noteLocationList){
 
-          for (int i = 0; i < noteTimingList.size(); i++){
-              notes.enqueue(key(noteTimingList.at(i), noteLocationlist.at(i)));
-          }
+          convertToKeys(noteTimingList.begin(), noteLocationList.begin(),noteTimingList.end(),noteLocationList.end(),notes);
       };
 
+
+
+
+     //calling lambda functions
       dataToVector(songDuration);
       getNotes(timings,locations);
+
 
      /****************************************************/
 
