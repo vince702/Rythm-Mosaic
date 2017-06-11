@@ -30,7 +30,15 @@ paper = new gamewindow();
 template<typename InputIterator, typename Container>
 void convertToKeys( InputIterator v1Start,InputIterator v2Start,InputIterator v1End, InputIterator v2End, Container &c ){
     while ( v1Start != v1End ){
-        c.enqueue(key(*v1Start, *v2Start));
+       try {c.enqueue(key(*v1Start, *v2Start));}
+        catch(std::exception &e ){
+            try{
+            c.push_back(key(*v1Start, *v2Start));}
+            catch(std::exception &e){
+                qDebug() << "invalid container";
+            }
+        }
+
         v1Start++;
         v2Start++;
     }
