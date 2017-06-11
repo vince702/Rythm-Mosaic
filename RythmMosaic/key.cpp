@@ -40,7 +40,8 @@ key::key(const int time, const int location){
 }
 
 void key::keyPressEvent(QKeyEvent *event){
-
+   //make it in the future , so that pressing a key is an option instead of only clicking the mouse
+    //to strike a note
 }
 
 void key::updateTimingWindow(){
@@ -51,14 +52,20 @@ if (status == 2){
 
 if (status >= 6 && duration == 0){
      //miss a note = reset combo
-    delete this;
+    try{
+    delete this;}
+    catch(std::exception &e){return;};
+
+
     k->scoreDisplay->resetCombo();
 }
 if (status >= 6 && duration== 1){
      //miss a note = reset combo
     k->scoreDisplay->increase();
     k->scoreDisplay->increaseCurrentCombo();
-    delete this;
+    try{
+    delete this;}
+    catch(std::exception &e){return;};
 }
 status ++;
 

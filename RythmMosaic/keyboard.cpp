@@ -31,8 +31,13 @@ extern gamewindow * paper;
 
 Keyboard::Keyboard()
 {
-  scoreDisplay = new score::score();
-  bpm = 60;
+  try {
+         scoreDisplay = new score::score();
+     }
+     catch( std::exception &e ) {
+
+         scoreDisplay = nullptr;
+     }
 
 }
 
@@ -223,8 +228,15 @@ void Keyboard::playNotes(){
 
 //qDebug() << "suw";
 
-  key  *note = new key(notes.dequeue());
+  key  *note;
 
+  try {
+         note = new key(notes.dequeue());
+     }
+     catch( std::exception &e ) {
+         qDebug() << "error";  // optional
+         note = nullptr;                  // REQUIRED!
+     }
 
 
 
@@ -255,10 +267,8 @@ void Keyboard::playNotes(){
 
      game->showTitleScreen();
 
-
-
-
  }
+
 
 }
 
