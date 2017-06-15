@@ -1,4 +1,10 @@
 # Rythm-Mosaic Game
+## About/Intro ##
+I like music, and I like games. I like rythm games. Initially, when I began working, the game was going to be a generic guitar hero/tap tap/ rock band style rythm game, where notes would fall and you'd have to hit the keyboard depending on where the note fell. This had been done to death, so why not try something new. Then I realized, clicking the mouse made a sound, and doing it rythmically created a beat, So I decided to make a game that required interactively clicking the mouse to the beat of a song.
+
+  Here are the very beginnings of my idea in a diff repo: 
+[![https://github.com/vince702/Game1/tree/customKeyClass/Game]()](https://github.com/vince702/Game1/tree/customKeyClass/Game)
+   
 
 ## **Objective:** 
 Tiles will appear following the beat of the song on the 4x4 grid and light up green when they need to be struck with the mouse.  The goal is to improve both HitCount and MaxCombo as much as possible in each attempt through the beatmap.
@@ -8,7 +14,7 @@ COMBO: number of keys you strike accurately in a row
 HitCount: number of keys struck accurately in total
 
 ###
-## **Specifications**
+## **Specifications** ##
 Implement a timer and a hitbox. When the mouse is clicked, a hitbox will appeaer where the cursor is. If the hitbox strikes an active key, it counts as a good hit and HitCount is increased, as well as the current combo. 
 
 If the hitbox doesn't strike a note, or if a note disappears before you hit it in time, it counts as a miss and your current combo is "broken," and your currentCombo is reset. 
