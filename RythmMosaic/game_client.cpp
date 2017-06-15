@@ -50,7 +50,7 @@ void convertToKeys( InputIterator v1Start,InputIterator v2Start,InputIterator v1
 
 void game_client::showTitleScreen(){
 
-    auto populateTitleScreen = [](){};
+
 
      if (view) view->close();
 
@@ -205,7 +205,7 @@ void game_client::start(){
      //reads the data from the timing and location list to creat a key, and adds to queue of keys to be played
       auto getNotes = [&notes](std::vector<double> &noteTimingList,std::vector<double> &noteLocationList){
 
-          convertToKeys(noteTimingList.begin(), noteLocationList.begin(),noteTimingList.end(),noteLocationList.end(),notes);
+        convertToKeys(noteTimingList.begin(), noteLocationList.begin(),noteTimingList.end(),noteLocationList.end(),notes);
       };
 
 
