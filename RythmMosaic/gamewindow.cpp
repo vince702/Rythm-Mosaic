@@ -7,9 +7,11 @@
 #include "keyboard.h"
 #include "hit.h"
 #include <QTimer>
+
+
  extern int currentTime;
  extern int playing;
-hit * hitbox;
+ hit * hitbox;
 
 gamewindow::gamewindow(QObject *parent) :
     QGraphicsScene(parent)
@@ -18,14 +20,10 @@ gamewindow::gamewindow(QObject *parent) :
 }
 
 
-
 void gamewindow::mousePressEvent(QGraphicsSceneMouseEvent * mouseEvent)
 {
 
-
     int radius = 20;
-
-
 
    hitbox = new hit(mouseEvent->scenePos().x() - radius, mouseEvent->scenePos().y() - radius, radius*2, radius*2);
     this->addItem(hitbox);
@@ -35,14 +33,6 @@ void gamewindow::mousePressEvent(QGraphicsSceneMouseEvent * mouseEvent)
     QGraphicsScene::mousePressEvent(mouseEvent);
 
 
-
-
-
 }
 
-void gamewindow::mouseReleaseEvent(QGraphicsSceneMouseEvent * me)
-{
 
-
-    QGraphicsScene::mouseReleaseEvent(me);
-}

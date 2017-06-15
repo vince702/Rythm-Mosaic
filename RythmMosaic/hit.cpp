@@ -10,6 +10,7 @@ extern int currentTime;
 extern int playing; //whether or not menu has already been loaded
 QTimer * timer;
 hit::hit(int x, int y, int width, int length){
+
     QMediaPlayer * currentSong = new QMediaPlayer();
     currentSong->setMedia(QUrl("qrc:/songs/clap.wav"));
     currentSong->play();

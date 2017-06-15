@@ -12,11 +12,9 @@ class gamewindow : public QGraphicsScene
     Q_OBJECT
 public:
     explicit gamewindow(QObject *parent = 0);
-
     virtual void mousePressEvent(QGraphicsSceneMouseEvent * mouseEvent);
-    virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent * mouseEvent);
-signals:
-   void clicked();
+
+
 public slots:
 
 private:
