@@ -8,10 +8,10 @@
 #include "hit.h"
 #include <QTimer>
 
-
  extern int currentTime;
  extern int playing;
- hit * hitbox;
+ std::unique_ptr<hit> hitbox;
+
 
 gamewindow::gamewindow(QObject *parent) :
     QGraphicsScene(parent)
@@ -23,9 +23,11 @@ gamewindow::gamewindow(QObject *parent) :
 void gamewindow::mousePressEvent(QGraphicsSceneMouseEvent * mouseEvent)
 {
 
-    int radius = 20;
 
-   hitbox = new hit(mouseEvent->scenePos().x() - radius, mouseEvent->scenePos().y() - radius, radius*2, radius*2);
+
+    int radius = 20;
+    std::unique_ptr<int> k (new int);
+   std::unique_ptr<hit> hitbox(new hit(mouseEvent->scenePos().x() - radius, mouseEvent->scenePos().y() - radius, radius*2, radius*2));
     this->addItem(hitbox);
     hitbox->setBrush(Qt::yellow);
 
